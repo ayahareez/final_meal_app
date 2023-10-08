@@ -108,6 +108,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     icon = Icons.edit;
                   });
                 },
+              0xffbc6c25
               ),
           child: Icon(icon)),
     );

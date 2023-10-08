@@ -82,12 +82,12 @@ class _MealsPageState extends State<MealsPage> {
               return ListView.separated(
                   itemBuilder: (_, i) => MealTile(
                     meal:
-                    snapshot.data![i],
+                    snapshot.data!.where((meal) => meal.id==widget.categorySection.id).toList()[i],
                   ),
                   separatorBuilder: (_, i) => const SizedBox(
                     height: 16,
                   ),
-                  itemCount: snapshot.data!.length);
+                  itemCount: snapshot.data!.where((meal) => meal.id==widget.categorySection.id).toList().length);
             }
             else{
               return CircularProgressIndicator();
@@ -110,6 +110,7 @@ class _MealsPageState extends State<MealsPage> {
                     id: widget.categorySection.id,
                     steps: stepsController.text,
                     ingredients: ingredientController.text,
+                  idUnique: int.parse(idController.text),
                  );
                 await MealLocalDsImpl().setMeal(meal);
                 await MealLocalDsImpl().getMeals().then((value) => print(value));
@@ -145,7 +146,7 @@ class _MealsPageState extends State<MealsPage> {
                                 },
                                 decoration: const InputDecoration(
                                   labelStyle: TextStyle(
-                                    color: Colors.white, // Change the label color here if needed
+                                    color: Colors.grey, // Change the label color here if needed
                                   ),
                                   labelText: "Enter The meal Name",
                                   border: OutlineInputBorder(),
@@ -167,7 +168,7 @@ class _MealsPageState extends State<MealsPage> {
                               },
                               decoration: const InputDecoration(
                                 labelStyle: TextStyle(
-                                  color: Colors.white, // Change the label color here if needed
+                                  color: Colors.grey, // Change the label color here if needed
                                 ),
                                 labelText: "Enter The meal diff",
                                 border: OutlineInputBorder(),
@@ -190,7 +191,7 @@ class _MealsPageState extends State<MealsPage> {
                               },
                               decoration: const InputDecoration(
                                 labelStyle: TextStyle(
-                                  color: Colors.white, // Change the label color here if needed
+                                  color: Colors.grey, // Change the label color here if needed
                                 ),
                                 labelText: "enter the time will be taken",
                                 border: OutlineInputBorder(),
@@ -213,7 +214,7 @@ class _MealsPageState extends State<MealsPage> {
                                 }, decoration: const InputDecoration(
 
                               labelStyle: TextStyle(
-                                color: Colors.white, // Change the label color here if needed
+                                color: Colors.grey, // Change the label color here if needed
                               ),
                               labelText: "enter the standard",
                               border: OutlineInputBorder(),
@@ -235,7 +236,7 @@ class _MealsPageState extends State<MealsPage> {
                                   return null;
                                 }, decoration:const InputDecoration(
                               labelStyle: TextStyle(
-                                color: Colors.white, // Change the label color here if needed
+                                color: Colors.grey, // Change the label color here if needed
                               ),
                               labelText: "enter the Image URL",
                               border: OutlineInputBorder(),
@@ -258,7 +259,7 @@ class _MealsPageState extends State<MealsPage> {
                                 },
                                 decoration:const InputDecoration(
                                   labelStyle: TextStyle(
-                                    color: Colors.white, // Change the label color here if needed
+                                    color: Colors.grey, // Change the label color here if needed
                                   ),
                                   labelText: "enter the  meal ingredients",
                                   border: OutlineInputBorder(),
@@ -281,7 +282,7 @@ class _MealsPageState extends State<MealsPage> {
                                 },
                                 decoration:  const InputDecoration(
                                   labelStyle: TextStyle(
-                                    color: Colors.white, // Change the label color here if needed
+                                    color: Colors.grey, // Change the label color here if needed
                                   ),
                                   labelText: "enter the meal steps",
                                   border: OutlineInputBorder(),
@@ -294,21 +295,22 @@ class _MealsPageState extends State<MealsPage> {
                             ),
                             TextFormTile(
                                 controller: idController,
-                                type: TextInputType.text,
+                                type: TextInputType.number,
                                 function: (value) {
                                   if (value!.isEmpty) {
+//this msg must be unique
                                     return 'meal id must be entered';
                                   }
                                   return null;
                                 },
-                                decoration: const InputDecoration(
+                                decoration:  const InputDecoration(
                                   labelStyle: TextStyle(
-                                    color: Colors.white, // Change the label color here if needed
+                                    color: Colors.grey, // Change the label color here if needed
                                   ),
-                                  labelText: "Enter The meal id",
+                                  labelText: "enter the meal id",
                                   border: OutlineInputBorder(),
                                   prefix: Icon(
-                                    Icons.title,
+                                    Icons.watch_later,
                                   ),
                                 )),
                           ],

@@ -56,7 +56,7 @@ class MealLocalDsImpl extends MealLocalDs{
     print(meal.isFav);
     pref.remove(mealsKey);
     for(int i=0;i<meals.length;i++){
-      if(meals[i].id !=meal.id){
+      if(meals[i].idUnique !=meal.idUnique){
         setMeal(meals[i]);
       }
       else{

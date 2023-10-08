@@ -184,7 +184,7 @@ class BottomSheetHandlerMeal {
                               imageUrl: 'assets/images/chicken.jpg',
                               id: categoryId,
                               steps: stepsController.text,
-                              ingredients: ingredientController.text,
+                              ingredients: ingredientController.text, idUnique: int.parse(idController.text),
                             );
 
                           //meals.add(meal);

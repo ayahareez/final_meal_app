@@ -126,6 +126,7 @@ class BottomSheetHandlerCategory {
     GlobalKey<FormState> formKey,
     GlobalKey<ScaffoldState> scaffoldKey,
     VoidCallback setStateCallback,
+      int x
   ) {
     Scaffold.of(context).showBottomSheet(
       (context) => Container(
@@ -179,7 +180,7 @@ class BottomSheetHandlerCategory {
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
                         final CategorySection category = CategorySection(
-                          color: Color(0xff6a994e),
+                          color: Color(x),
                           categoryName: nameController.text,
                           id: int.parse(idController.text),
                         );
