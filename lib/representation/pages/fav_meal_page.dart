@@ -38,9 +38,9 @@ class _FavoriteMealsPageState extends State<FavoriteMealsPage> {
             builder: (context, snapshot) {
               if(snapshot.hasData){
                 return ListView.separated(
-                  itemBuilder: (_,i)=>MealTile(meal: snapshot.data!.where((meal) => meal.isFav==true).toList()[i]),
+                  itemBuilder: (_,i)=>MealTile(meal: snapshot.data!.where((meal) => meal.isFav).toList()[i], onFavState: ()=>setState((){}),),
                   separatorBuilder:(_,i)=>const SizedBox(height: 16,),
-                  itemCount:snapshot.data!.where((meal) => meal.isFav==true).toList().length,
+                  itemCount:snapshot.data!.where((meal) => meal.isFav).toList().length,
                 );
               }
               else{

@@ -6,10 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/category.dart';
 
 abstract class MealLocalDs{
+  ///this function get all [Meal]s from the [SharesPreferences] and
+  ///take no parameter
   Future<List<Meal>> getMeals();
 
+  ///this function set [Meal] to the [SharesPreferences] and
+  ///take [Meal] object as parameter
   Future<void> setMeal(Meal meal);
-
+  ///this function get all fav [Meal]s from the [SharesPreferences] and
+  ///take [Meal] object as parameter
   Future<void> setFavMeal(Meal meal);
 
 }
@@ -45,14 +50,6 @@ class MealLocalDsImpl extends MealLocalDs{
   Future<void> setFavMeal(Meal meal) async {
     final pref=await SharedPreferences.getInstance();
      List<Meal> meals=await getMeals();
-    // Meal? meal;
-    // for(int i=0;i<meals.length;i++){
-    //   if(meals[i].id==id){
-    //     meal=meals[i];
-    //     break;
-    //   }
-    // }
-    // if (meal == null) {throw Exception('Pet Not Found');}
     print(meal.isFav);
     pref.remove(mealsKey);
     for(int i=0;i<meals.length;i++){

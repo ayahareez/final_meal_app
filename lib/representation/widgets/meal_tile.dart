@@ -9,8 +9,8 @@ import '../../data/models/meal_provider.dart';
 
 class MealTile extends StatefulWidget {
   final Meal meal;
-
-  MealTile({super.key, required this.meal});
+final Function onFavState;
+  MealTile({super.key, required this.meal, required this.onFavState});
 
   @override
   State<MealTile> createState() => _MealTileState();
@@ -97,31 +97,29 @@ class _MealTileState extends State<MealTile> {
                           fontSize: 16,
                         ),
                       ),
-                      Consumer<MealProvider>(
-                        builder:(context,favModel,child)=> Checkbox(
-                          value: isFav,
-                          onChanged: (value) async {
-                            //mealProvider.toggleFavorite(widget.meal);
-                            setState(() {
-                              isFav=value!;
-                              widget.meal.isFav=value;
-                            });
-                              await MealLocalDsImpl().setFavMeal(widget.meal);
-                              final pref =await SharedPreferences.getInstance();
-                              List<String> mealsJson=pref.getStringList('meals')??[];
-                              print(mealsJson);
-
-                            // setState(() {
-                            //   if(value==true){
-                            //     favMeals.add(widget.meal);
-                            //   }
-                            //   else if(value==false){
-                            //     favMeals.remove(widget.meal);
-                            //   }
-                           // }
-                           // );
-                          },
-                        ),
+                      Checkbox(
+                        value: isFav,
+                        onChanged: (value) async {
+                          //mealProvider.toggleFavorite(widget.meal);
+                          setState(() {
+                            isFav=value!;
+                            widget.meal.isFav=value;
+                          });
+                            await MealLocalDsImpl().setFavMeal(widget.meal);
+                            final pref =await SharedPreferences.getInstance();
+                            List<String> mealsJson=pref.getStringList('meals')??[];
+                            print(mealsJson);
+                          widget.onFavState();
+                          // setState(() {
+                          //   if(value==true){
+                          //     favMeals.add(widget.meal);
+                          //   }
+                          //   else if(value==false){
+                          //     favMeals.remove(widget.meal);
+                          //   }
+                         // }
+                         // );
+                        },
                       ),
                     ],
                   )
