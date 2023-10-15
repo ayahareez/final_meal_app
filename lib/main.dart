@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:meals_app/data/data_source/meals_data.dart';
-import 'package:meals_app/representation/bloc/categories_bloc.dart';
-import 'package:meals_app/representation/pages/categories_page.dart';
-import 'package:meals_app/representation/pages/meal_info_page.dart';
-import 'package:meals_app/representation/pages/meals_page.dart';
-import 'package:meals_app/representation/pages/controller_page.dart';
-import 'package:meals_app/representation/pages/splash_screen.dart';
-import 'package:meals_app/representation/widgets/meal_tile.dart';
+import 'package:meals_app/category/presentation/pages/categories_page.dart';
+import 'package:meals_app/meal/presentation/pages/controller_page.dart';
+import 'package:meals_app/meal/presentation/widgets/meal_tile.dart';
 import 'package:provider/provider.dart';
 
-import 'data/models/meal_provider.dart';
+import 'category/presentation/bloc/categories_bloc.dart';
+import 'meal/presentation/bloc/meal_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider(create: (_) => CategoriesBloc()),
+    BlocProvider(create: (_) => MealBloc())
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -23,25 +22,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MealProvider(),
-      child: MultiBlocProvider(
-
-        providers: [
-          BlocProvider(
-              create: (_)=>CategoriesBloc())
-        ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: ControllerPage(),
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
+      home: ControllerPage(),
     );
   }
 }

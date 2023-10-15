@@ -1,32 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/meal_lacal_datasource/meal_lacal_datasource.dart';
-import 'package:meals_app/data/models/meals.dart';
-import 'package:meals_app/representation/pages/meal_info_page.dart';
+import 'package:meals_app/meal/data/models/meals.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../data/models/meal_provider.dart';
+import '../../meal_lacal_datasource/meal_lacal_datasource.dart';
+import '../bloc/meal_bloc.dart';
+import '../pages/meal_info_page.dart';
 
 class MealTile extends StatefulWidget {
   final Meal meal;
-final Function onFavState;
-  MealTile({super.key, required this.meal, required this.onFavState});
+  MealTile({super.key, required this.meal});
 
   @override
   State<MealTile> createState() => _MealTileState();
 }
 
 class _MealTileState extends State<MealTile> {
-  bool isFav=false;
+  bool isFav = false;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     isFav = widget.meal.isFav;
   }
+
   @override
   Widget build(BuildContext context) {
-   // final mealProvider = Provider.of<MealProvider>(context);//object
+    // final mealProvider = Provider.of<MealProvider>(context);//object
     //final isFavorite = mealProvider.isMealFavorite(widget.meal);//جواها ولا لا ال  meal دي
 
     return GestureDetector(
@@ -102,23 +101,12 @@ class _MealTileState extends State<MealTile> {
                         onChanged: (value) async {
                           //mealProvider.toggleFavorite(widget.meal);
                           setState(() {
-                            isFav=value!;
-                            widget.meal.isFav=value;
+                            isFav = value!;
+                            widget.meal.isFav = value;
                           });
-                            await MealLocalDsImpl().setFavMeal(widget.meal);
-                            final pref =await SharedPreferences.getInstance();
-                            List<String> mealsJson=pref.getStringList('meals')??[];
-                            print(mealsJson);
-                          widget.onFavState();
-                          // setState(() {
-                          //   if(value==true){
-                          //     favMeals.add(widget.meal);
-                          //   }
-                          //   else if(value==false){
-                          //     favMeals.remove(widget.meal);
-                          //   }
-                         // }
-                         // );
+                          context
+                              .read<MealBloc>()
+                              .add(SetFavMeal(meal: widget.meal));
                         },
                       ),
                     ],

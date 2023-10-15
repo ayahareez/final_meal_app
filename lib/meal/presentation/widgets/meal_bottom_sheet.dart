@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/category_local_datasource/category_local_datasource.dart';
-import 'package:meals_app/representation/widgets/text_form_field_tile.dart';
-
-import '../../data/data_source/categories.dart';
-import '../../data/data_source/meals_data.dart';
-import '../../data/models/category.dart';
+import 'package:meals_app/category/data/category_local_datasource.dart';
+import '../../../category/data/models/category.dart';
+import '../../../shared/widgets/text_form_field_tile.dart';
 import '../../data/models/meals.dart';
 
 

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/representation/pages/categories_page.dart';
-import 'package:meals_app/representation/pages/fav_meal_page.dart';
+import 'package:meals_app/category/presentation/pages/categories_page.dart';
+import 'package:meals_app/meal/presentation/pages/fav_meal_page.dart';
 
 class ControllerPage extends StatefulWidget {
   const ControllerPage({super.key});
-
 
   @override
   State<ControllerPage> createState() => _ControllerPageState();
 }
 
 class _ControllerPageState extends State<ControllerPage> {
- int index =0;
- var pageController;
-@override
+  int index = 0;
+  var pageController;
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    pageController=PageController();
-}
+    pageController = PageController();
+  }
 
   @override
   Widget build(BuildContext context) {

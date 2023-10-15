@@ -4,7 +4,7 @@ import 'dart:core';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/category.dart';
+import 'models/category.dart';
 
 abstract class CategoryLocalDs{
 

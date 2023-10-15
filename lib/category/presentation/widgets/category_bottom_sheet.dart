@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/category_local_datasource/category_local_datasource.dart';
-import 'package:meals_app/representation/widgets/text_form_field_tile.dart';
-
-import '../../data/data_source/categories.dart';
-import '../../data/data_source/meals_data.dart';
+import 'package:meals_app/category/data/category_local_datasource.dart';
+import 'package:meals_app/category/presentation/bloc/categories_bloc.dart';
+import '../../../shared/widgets/text_form_field_tile.dart';
 import '../../data/models/category.dart';
-import '../../data/models/meals.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../meal/data/models/meals.dart';
 
 // class BottomSheetVisibility extends StatefulWidget {
 //    BottomSheetVisibility({Key? key, required this.nameController, required this.idController, required this.context}) : super(key: key);
@@ -119,15 +118,12 @@ import '../../data/models/meals.dart';
 
 class BottomSheetHandlerCategory {
   static void handleButtonPressed(
-    bool isShowBottomSheet,
-    TextEditingController nameController,
-    TextEditingController idController,
-    BuildContext context,
-    GlobalKey<FormState> formKey,
-    GlobalKey<ScaffoldState> scaffoldKey,
-    VoidCallback setStateCallback,
-      int x
-  ) {
+      TextEditingController nameController,
+      TextEditingController idController,
+      BuildContext context,
+      GlobalKey<FormState> formKey,
+      GlobalKey<ScaffoldState> scaffoldKey,
+      int x) {
     Scaffold.of(context).showBottomSheet(
       (context) => Container(
         color: Colors.black,
@@ -184,11 +180,10 @@ class BottomSheetHandlerCategory {
                           categoryName: nameController.text,
                           id: int.parse(idController.text),
                         );
-                        CategoryLocalDsImpl().setCategory(category);
-                        //categories.add(category);
+                        context
+                            .read<CategoriesBloc>()
+                            .add(SetCategory(category));
                         Navigator.pop(context);
-                        isShowBottomSheet = false;
-                        setStateCallback();
                       }
                     },
                     child: Text('Add'))
@@ -197,8 +192,6 @@ class BottomSheetHandlerCategory {
           ),
         ),
       ),
-    );
-    isShowBottomSheet = true;
-    // setStateCallback();
+    ); // setStateCallback();
   }
 }

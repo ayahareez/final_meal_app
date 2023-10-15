@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/models/category.dart';
-import 'package:meals_app/representation/widgets/text_form_field_tile.dart';
+import 'package:meals_app/category/data/models/category.dart';
 
-import '../../data/meal_lacal_datasource/meal_lacal_datasource.dart';
+import '../../../shared/widgets/text_form_field_tile.dart';
 import '../../data/models/meals.dart';
+import '../../meal_lacal_datasource/meal_lacal_datasource.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/meal_bloc.dart';
 
 class FloatingAction extends StatefulWidget {
   final CategorySection categorySection;
-  final Function onSubmit;
-  const FloatingAction({super.key, required this.categorySection, required this.onSubmit});
+  const FloatingAction({super.key, required this.categorySection});
   @override
   State<FloatingAction> createState() => _FloatingActionState();
 }
@@ -50,10 +52,7 @@ class _FloatingActionState extends State<FloatingAction> {
                 ingredients: ingredientController.text,
                 idUnique: int.parse(idController.text),
               );
-              await MealLocalDsImpl().setMeal(meal);
-              await MealLocalDsImpl().getMeals().then((value) => print(value));
-              //meals.add(meal);
-              widget.onSubmit();
+              context.read<MealBloc>().add(SetMeal(meal: meal));
               Navigator.pop(context);
               isShowBottomSheet = false;
               setState(() {

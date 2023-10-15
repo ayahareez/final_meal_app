@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/models/meals.dart';
-import 'package:meals_app/representation/pages/meals_page.dart';
-
-import '../../data/data_source/meals_data.dart';
+import 'package:meals_app/meal/data/models/meals.dart';
 
 class MealInfoPage extends StatelessWidget {
-final Meal meal ;
+  final Meal meal;
   const MealInfoPage({super.key, required this.meal});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
-        title:Text(
-           meal.name,
-          style: const TextStyle(
-            color: Colors.white
-          ),
-        ) ,
+        title: Text(
+          meal.name,
+          style: const TextStyle(color: Colors.white),
+        ),
       ),
       body: Container(
         color: Colors.black,
@@ -28,24 +23,22 @@ final Meal meal ;
               meal.imageUrl,
               fit: BoxFit.cover,
             ),
-            const SizedBox(height:16 ,),
+            const SizedBox(
+              height: 16,
+            ),
             const Text(
               'Ingredients',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                color: Colors.orangeAccent
-              ),
+                  color: Colors.orangeAccent),
             ),
             const SizedBox(
               height: 8,
             ),
             Text(
               meal.ingredients,
-              style: const TextStyle(
-                  color: Colors.white38,
-                fontSize: 16
-              ),
+              style: const TextStyle(color: Colors.white38, fontSize: 16),
             ),
             const SizedBox(
               height: 16,
@@ -53,22 +46,17 @@ final Meal meal ;
             const Text(
               'Steps',
               style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                  color: Colors.orangeAccent
-              ),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Colors.orangeAccent),
             ),
             const SizedBox(
               height: 8,
             ),
             Text(
               meal.steps,
-              style: const TextStyle(
-                color: Colors.white38,
-                fontSize: 16
-              ),
+              style: const TextStyle(color: Colors.white38, fontSize: 16),
             ),
-
           ],
         ),
       ),
@@ -183,4 +171,3 @@ final Meal meal ;
 //       return 'fallback_image_url.jpg';
 //   }
 // }
-
