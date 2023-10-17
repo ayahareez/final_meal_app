@@ -58,4 +58,9 @@ class MealLocalDsImpl extends MealLocalDs {
       }
     }
   }
+
+  Future<void> deleteMeals() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    preferences.remove(mealsKey);
+  }
 }

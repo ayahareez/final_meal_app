@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:meals_app/meal/data/models/meals.dart';
 import 'package:provider/provider.dart';
@@ -114,8 +116,8 @@ class _MealTileState extends State<MealTile> {
                 ],
               ),
             ),
-            child: Image.asset(
-              widget.meal.imageUrl,
+            child: Image.file(
+              File(widget.meal.imageUrl),
               fit: BoxFit.cover,
             ),
           ),

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:meals_app/category/data/models/category.dart';
 import 'package:meals_app/meal/data/models/meals.dart';
@@ -86,22 +89,3 @@ class _MealsPageState extends State<MealsPage> {
     );
   }
 }
-// FloatingActionButton(
-// onPressed:()=> BottomSheetHandlerMeal.handleBottomSheet(
-// imageUrlController: imageUrlController,
-// ingredientController: ingredientController,
-// stepsController: stepsController,
-// difficultyController: difficultyController,
-// nameController: nameController,
-// standardController: standardController,
-// timeController: timeController,
-// formKey: formKey,
-// categoryId: widget.categorySection.id,
-// context: context,
-// setStateCallback: () {
-// setState(() {
-// icon = Icons.edit;
-// });
-// }),
-// child: Icon(Icons.edit),
-// ),
